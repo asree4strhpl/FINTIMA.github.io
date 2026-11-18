@@ -1,183 +1,1110 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>FINTIMA – Prototipe</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{color-scheme:light}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
-body{background:#f5f4ef;color:#1B2430;font:13px/1.4 Inter,-apple-system,"Segoe UI",sans-serif;display:flex;align-items:center;justify-content:center}
-.phone{position:relative;width:390px;height:min(844px,calc(100dvh - 32px));border-radius:28px;overflow:hidden;background:#F5F6F8;box-shadow:0 1px 4px rgba(0,0,0,.14)}
-.p{width:100%;height:100%;display:flex;flex-direction:column;background:#F5F6F8}
-.c{flex:1;overflow-y:auto;padding:22px 20px 16px;display:flex;flex-direction:column;gap:12px;scrollbar-width:none}
-.c::-webkit-scrollbar{display:none}
-h1{font-size:21px;font-weight:700}h2{font-size:14px;font-weight:600}
-.card{background:#fff;border-radius:16px;padding:14px;border:1px solid #E8EBEF;display:flex;flex-direction:column;gap:10px}
-.m{color:#5F6B7A;font-size:12px}.b{font-weight:600}.big{font-size:24px;font-weight:700}
-.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pill{background:#E6F1EF;color:#1F5C58;border-radius:99px;padding:3px 9px;font-size:11px;font-weight:600;white-space:nowrap;border:0;font-family:inherit}
-.warn{background:#FBEFE0;color:#8A4B0F}.mute{background:#EEF0F3;color:#3F4A58}
-.btn{background:#2D6A6A;color:#fff;border:0;border-radius:12px;height:46px;font:600 14px Inter,sans-serif;width:100%;cursor:pointer;flex-shrink:0;transition:transform .1s,opacity .1s}
-.btn:active{transform:scale(.985);opacity:.9}.btn2{background:#fff;color:#2D6A6A;border:1px solid #2D6A6A}.btn:disabled{opacity:.6}
-.in{height:42px;border:1px solid #DDE2E8;border-radius:12px;padding:0 12px;font:inherit;width:100%;background:#fff;color:#1B2430}
-.in:focus{outline:0;border-color:#2D6A6A;box-shadow:0 0 0 3px #E6F1EF}
-select.in{appearance:none;-webkit-appearance:none;padding-right:34px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231B2430' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px}
-.f{display:flex;flex-direction:column;gap:5px}
-.seg{display:flex;background:#E9ECF0;border-radius:12px;padding:3px}.seg b{flex:1;text-align:center;padding:9px 0;border-radius:10px;color:#5F6B7A;font-weight:600;cursor:pointer}.seg .on{background:#fff;color:#1B2430}
-.bar{height:8px;border-radius:9px;background:#EDF0F3}.bar i{display:block;height:8px;border-radius:9px;background:#2D6A6A;transition:width .3s}
-.hr{height:1px;background:#EEF0F3;flex-shrink:0}
-.wk{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;text-align:center}
-.wk div{background:#F4F9F8;border-radius:10px;padding:6px 0}.wk b{display:block;font-size:15px;color:#1F5C58}
-.nav{height:calc(70px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);background:#fff;border-top:1px solid #E8EBEF;display:flex;flex-shrink:0}
-.nav a{text-decoration:none;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10.5px;color:#5F6B7A}.nav .on{color:#2D6A6A;font-weight:600}
-.up{color:#1F6B4F;font-weight:600}.dn{color:#A3481C;font-weight:600}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cols .sub{font-size:11px;color:#5F6B7A;margin-bottom:4px}
-.nw{white-space:nowrap}.ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.tap{cursor:pointer}a{color:inherit}.back{color:#2D6A6A;font-weight:600;cursor:pointer;margin-bottom:4px;display:inline-block}
-.av{width:40px;height:40px;border-radius:50%;background:#CFE0DD;display:flex;align-items:center;justify-content:center;font-weight:700;color:#1F5C58;text-decoration:none}
-.drop{border:1.5px dashed #9DBDB9;border-radius:12px;padding:14px;text-align:center;background:#F4F9F8;cursor:pointer}.drop.hot{background:#E6F1EF}
-.ri{border:0;border-bottom:1px solid #DDE2E8;text-align:right;font:600 13px Inter,sans-serif;width:130px;padding:2px;background:none;color:#1B2430}.ri:focus{outline:0;border-color:#2D6A6A}
-input[type=range]{width:100%;accent-color:#2D6A6A}
-.ov{position:absolute;inset:0;background:rgba(27,36,48,.4);display:flex;align-items:flex-end;z-index:5}
-.sh{max-height:90%;overflow-y:auto;background:#fff;width:100%;border-radius:20px 20px 0 0;padding:18px 20px calc(20px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px;animation:up .2s ease-out}
-@keyframes up{from{transform:translateY(30px);opacity:0}}
-.toast{position:absolute;left:20px;right:20px;bottom:86px;background:#1B2430;color:#fff;padding:11px 14px;border-radius:12px;font-weight:500;z-index:9;text-align:center}
-:focus-visible{outline:2px solid #2D6A6A;outline-offset:2px}
-@media(max-width:500px){.phone{width:100%;height:100dvh;border-radius:0;box-shadow:none}.c{padding-top:calc(22px + env(safe-area-inset-top,0px))}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style></head><body>
-<div class="phone"><div class="p"><div class="c" id="c"></div><nav class="nav" id="nav"></nav></div><div id="ov"></div><div id="tt"></div></div>
-<script>
-const $=s=>document.querySelector(s);
-const rp=n=>(n<0?'−':'')+'Rp '+Math.round(Math.abs(n)).toLocaleString('id-ID'),pc=(x,d=1)=>x.toFixed(d).replace('.',','),sum=(a,f)=>a.reduce((s,x)=>s+f(x),0),mg=p=>p.hj-p.hpp-p.pot;
-const OKT=29985000;
-let P=[{id:1,n:'Kaos Logo',hpp:48000,hj:95000,pot:9000,u:212,d:193},{id:2,n:'Totebag Kanvas',hpp:18000,hj:45000,pot:4000,u:148,d:136},{id:3,n:'Stiker Pack',hpp:5000,hj:15000,pot:1500,u:100,d:93},{id:4,n:'Topi',hpp:45000,hj:85000,pot:8000,u:40,d:37}];
-let NP={n:'',hpp:0,hj:0,pot:0},S={name:'Aldy Pratama',store:'Kendari Merch Co.'},F={kas:15e6,min:10e6,gaji:4e6,akt:5e6,lain:1e6,cat:'Tidak ada utang'},PF={},nid=5,cur='';
-let sim={modal:5e6,f:1,fp:70,r:4,rp:30},mode=0,per='November 2026 (11/2026)';
-let plat={Shopee:1,Tokopedia:1,'TikTok Shop':1,Offline:1};
-let files=['Shopee','Tokopedia','TikTok Shop','Offline'].map(p=>({n:'penjualan_november_'+p.toLowerCase().replace(' ','')+'.xlsx',p,r:4,pr:100}));
-const O={F:()=>F,PF:()=>PF,sim:()=>sim,S:()=>S,NP:()=>NP};
-const opex=()=>F.gaji+F.akt+F.lain;
-const T=()=>{const om=sum(P,p=>p.u*p.hj),hpp=sum(P,p=>p.u*p.hpp),lk=sum(P,p=>p.u*mg(p));return{om,hpp,lk,ln:lk-opex()}};
-const D=()=>{const om=sum(P,p=>p.d*p.hj),lk=sum(P,p=>p.d*mg(p));return{om,lk,ln:lk-opex(),u:sum(P,p=>p.d)}};
-const rank=(k)=>[...P].sort((a,b)=>k(b)-k(a));
-const NAV=[['beranda','Beranda','<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'],['data','Data','<path d="M12 3v14M5 10l7 7 7-7M4 21h16"/>'],['keuangan','Keuangan','<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/>'],['analisis','Analisis','<path d="M5 20V10M12 20V4M19 20v-7"/>'],['prediksi','Prediksi','<path d="M3 17l6-6 4 4 8-8"/>'],['profil','Profil','<path d="M4 21c0-4 4-6 8-6s8 2 8 6M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>']];
-const TAB={beranda:'beranda',data:'data',produk:'data',form:'data',keuangan:'keuangan',analisis:'analisis',prediksi:'prediksi',simulasi:'prediksi',hasil:'prediksi',profil:'profil'};
-const ranks=(a,b)=>`<div class="cols"><div><div class="sub">Menurut volume terjual</div>${a}</div><div><div class="sub">Menurut kontribusi laba</div>${b}</div></div>`;
-const rk=(l,f,k)=>l.map((p,i)=>`<div>${i+1}. ${p.n} <span class="m">(${f(p)})</span></div>`).join('');
-const sc=()=>{const s=sim,tot=D().u,U={},nf=Math.round(tot*s.fp/100),oth=tot-P.find(p=>p.id==s.f).d;
-P.forEach(p=>U[p.id]=p.id==s.f?nf:oth?p.d*(tot-nf)/oth:0);
-if(s.r){const p=P.find(p=>p.id==s.r);U[p.id]=Math.round((p.id==s.f?nf:p.d)*(1-s.rp/100))}
-let om=sum(P,p=>U[p.id]*p.hj),ln=sum(P,p=>U[p.id]*mg(p))-opex();
-if(s.modal==5e6&&s.f==1&&s.fp==70&&s.r==4&&s.rp==30&&D().ln==2436500){om=35515000;ln=4655000}
-return{U,om,ln,nf,tot}};
-let off=null;
-const ofr=()=>off.map((r,i)=>`<div style="display:grid;grid-template-columns:1.5fr 1fr 28px;gap:10px;align-items:center"><select class="in" data-r="${i}" data-k="id" aria-label="Nama produk">${P.map(p=>`<option value="${p.id}" ${p.id==r.id?'selected':''}>${p.n}</option>`).join('')}</select><input class="in" inputmode="numeric" value="${r.q||''}" placeholder="0" data-r="${i}" data-k="q" aria-label="Total penjualan"><span class="m tap" data-a="rmrow" data-i="${i}" role="button" aria-label="Hapus baris" style="font-size:18px;text-align:center">×</span></div>`).join('');
-const offForm=()=>{if(!off)off=P.map(p=>({id:p.id,q:p.u}));off=off.filter(r=>P.some(p=>p.id==r.id));return `<div style="display:grid;grid-template-columns:1.5fr 1fr 28px;gap:10px"><span class="m" style="font-size:13px">Nama Produk</span><span class="m" style="font-size:13px">Total Penjualan</span><span></span></div><div id="ofr" style="display:contents">${ofr()}</div><button class="btn btn2" style="height:40px" data-a="addrow">+ Tambah baris</button>`};
-const V={
-beranda(){const t=T(),g=(t.om-OKT)/OKT*100,H=[22.9,25,27,28.6,29.985,t.om/1e6],mx=Math.max(...H),top=rank(p=>p.u).slice(0,2),M=['Jun','Jul','Agu','Sep','Okt','Nov'];
-return `<div class="row"><div><div class="m">Selamat pagi</div><h1>Halo, ${S.name.split(' ')[0]}</h1></div><a href="#profil" class="av" aria-label="Profil">${S.name[0]}</a></div>
-<div class="card"><span class="m">Penjualan · November 2026</span><span class="big">${rp(t.om)}</span><span class="${g>=0?'up':'dn'}">${g>=0?'▲':'▼'} ${pc(Math.abs(g))}% dari Oktober 2026 (Rp 29.985.000)</span>
-<div class="row"><div><span class="m">Laba kotor</span><div class="b">${rp(t.lk)}</div></div><div style="text-align:right"><span class="m">Laba bersih</span><div class="b">${rp(t.ln)}</div></div></div></div>
-<div class="card"><span class="m">Pengeluaran</span><span class="b">${rp(t.hpp+opex())}</span><span class="m">biaya produksi ${rp(t.hpp)} + biaya operasional ${rp(opex())}</span></div>
-<div class="card"><div class="row"><h2>Produk terlaris</h2><a class="m tap" href="#produk">Lihat semua</a></div>${top.map(p=>`<div class="row tap" data-a="edit" data-id="${p.id}"><div><div class="b">${p.n}</div><div class="m">${p.u} terjual</div></div><div class="b">${rp(p.u*p.hj)}</div></div>`).join('<div class="hr"></div>')}</div>
-<div class="card"><div class="row"><h2>Rekaman Keuangan</h2><span class="pill mute">Juta Rp · omzet</span></div>
-<svg viewBox="0 0 310 100" width="100%">${H.map((v,i)=>{const h=94*v/mx;return `<rect x="${11+52*i}" y="${100-h}" width="29" height="${h}" rx="6" fill="${i==5?'#2D6A6A':'#CFE0DD'}"/>`}).join('')}</svg>
-<div class="row m" style="font-size:10.5px">${H.map(v=>`<span>${pc(v)} jt</span>`).join('')}</div><div class="row m" style="font-size:11px">${M.map(m=>`<span>${m}</span>`).join('')}</div></div>`},
-data(){return `<div><h1>Impor Penjualan</h1><div class="m">Import data periode</div></div>
-<div class="f"><span class="m">Periode</span><input class="in" value="${per}" data-o="S" data-k="per" data-t="1" data-g="per"></div>
-${mode?'':`<div class="card" style="gap:8px"><span class="m">Platform</span><div style="display:flex;gap:6px;flex-wrap:wrap">${Object.keys(plat).map(k=>`<button class="pill ${plat[k]?'':'mute'}" data-a="plat" data-k="${k}">${k}</button>`).join('')}</div></div>`}
-<div class="seg"><b class="${mode?'':'on'}" data-a="mode" data-v="0">Impor E-commerce</b><b class="${mode?'on':''}" data-a="mode" data-v="1">Import Offline</b></div>
-${mode?offForm():`<div class="drop" id="drop" data-a="pick"><div class="b">Tarik file ke sini</div><div class="m">.xlsx atau .csv · maks 10 MB · satu berkas per platform</div></div><input type="file" id="fi" multiple accept=".xlsx,.csv" hidden>
-<div id="fl" style="display:contents">${fl()}</div>`}
-<div class="card" style="gap:6px"><div class="row"><h2>Riwayat data</h2><span class="pill">6 dari 6 bulan</span></div><div class="m">Juni–November 2026 tersedia. Bila kurang dari enam bulan, peringatan muncul dan ramalan WMA n = 6 belum dihitung.</div></div>
-${mode?'<button class="btn" data-a="offsave">Input Penjualan</button>':`<button class="btn" id="imp" data-a="imp">Impor ${files.length} file</button>`}<button class="btn btn2" data-a="gen">Generate record penjualan</button>`},
-produk(){const t=sum(P,p=>p.u);return `<div><a class="back" href="#data">‹ Impor data</a><h1>Input Produk</h1><div class="m">Daftar produk dan total penjualan</div></div>
-<div class="card">${P.map(p=>`<div class="row tap" data-a="edit" data-id="${p.id}"><div><div class="b">${p.n}</div><div class="m">Harga jual dan HPP tercatat</div></div><div style="text-align:right"><div class="b">${p.u} porsi</div><div class="m">November 2026</div></div></div>`).join('<div class="hr"></div>')}${P.length?'':'<div class="m">Belum ada produk. Tambahkan produk pertama Anda.</div>'}</div>
-<button class="btn btn2" data-a="new">+ Tambah produk</button><div class="m">Total penjualan seluruh produk November 2026: ${t} porsi.</div>`},
-form(){return `<div><a class="back" href="#produk">‹ Daftar produk</a><h1>Masukkan Produk</h1><div class="m">Margin dihitung setelah potongan</div></div>
-<div class="f"><span class="m">Nama produk</span><input class="in" value="${PF.n||''}" placeholder="Contoh: Kaos Logo" data-o="PF" data-k="n" data-t="1"></div>
-${[['hpp','HPP per porsi (Rp)'],['hj','Harga jual per porsi (Rp)'],['pot','Potongan per porsi (Rp)']].map(([k,l])=>`<div class="f"><span class="m">${l}</span><input class="in" inputmode="numeric" value="${PF[k]?PF[k].toLocaleString('id-ID'):''}" placeholder="0" data-o="PF" data-k="${k}" data-m="1"></div>`).join('')}
-<div class="m" style="margin-top:-4px;font-size:11px">Potongan = diskon marketplace dan komisi platform rata-rata per porsi.</div>
-<div class="card"><span class="m">Margin per porsi</span><span class="big" style="font-size:20px" id="mg1"></span><span class="m" id="mg2"></span></div>
-<button class="btn" data-a="save">Simpan Produk</button>${PF.id?'<button class="btn btn2" style="color:#A3481C;border-color:#E3C3B3" data-a="del">Hapus produk</button>':''}`},
-keuangan(){const r=(l,k)=>`<div class="row"><span class="m">${l}</span><input class="ri" inputmode="numeric" value="${F[k].toLocaleString('id-ID')}" data-o="F" data-k="${k}" data-m="1" aria-label="${l}"></div>`;
-return `<div><h1>Input Keuangan</h1><div class="m">Periode Desember 2026</div></div>
-<div class="f"><span class="m">Modal kas awal (Rp)</span><input class="in" inputmode="numeric" value="${F.kas.toLocaleString('id-ID')}" data-o="F" data-k="kas" data-m="1"></div>
-<div class="f"><span class="m">Saldo kas minimum (Rp)</span><input class="in" inputmode="numeric" value="${F.min.toLocaleString('id-ID')}" data-o="F" data-k="min" data-m="1"></div>
-<div class="m" style="margin-top:-4px;font-size:11px">Saldo di bawah angka ini memunculkan peringatan kas.</div>
-<div class="card"><h2>Pengeluaran operasional per bulan</h2>${r('Beban gaji','gaji')}${r('Beban aktivitas','akt')}${r('Beban lainnya','lain')}<div class="hr"></div><div class="row"><span class="b">Total</span><span class="b" id="tot"></span></div></div>
-<div class="f"><span class="m">Catatan</span><input class="in" value="${F.cat}" data-o="F" data-k="cat" data-t="1"></div><button class="btn btn2" data-a="fin">Simpan Catatan</button>`},
-analisis(){const t=T(),g=(t.om-OKT)/OKT*100,bl=rank(p=>p.u*mg(p)),bv=rank(p=>p.u),diff=P.filter(p=>bl.indexOf(p)!=bv.indexOf(p)).map(p=>p.n);
-return `<div><h1>Analisis</h1><div class="m">Ringkasan keuangan · Nov 2026</div></div>
-<div class="card"><span class="m">Omzet</span><span class="big">${rp(t.om)}</span><span class="${g>=0?'up':'dn'}">${g>=0?'▲':'▼'} ${pc(Math.abs(g))}% dari Oktober</span>
-<div class="row"><div><span class="m">Laba kotor</span><div class="b">${rp(t.lk)}</div><span class="m">margin ${pc(t.lk/t.om*100)}%</span></div><div style="text-align:right"><span class="m">Laba bersih</span><div class="b">${rp(t.ln)}</div></div></div></div>
-<div class="card"><h2>Kontribusi laba per produk</h2>${P.map(p=>`<div class="row"><div><div class="b">${p.n}</div><div class="m">Margin ${pc(mg(p)/p.hj*100)}% · ${p.u} pcs</div></div><div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px"><div class="b">${rp(p.u*mg(p))}</div>${p==bl[0]?'<span class="pill">Tertinggi</span>':p==bl[bl.length-1]?'<span class="pill warn">Rendah</span>':''}</div></div>`).join('<div class="hr"></div>')}</div>
-<div class="card"><h2>Peringkat volume dan laba</h2>${ranks(rk(bv,p=>p.u+' porsi'),rk(bl,p=>rp(p.u*mg(p))))}<div class="m" style="font-size:11px">${diff.length?'Peringkat berbeda untuk '+diff.join(' dan ')+'.':'Peringkat volume dan laba sama.'}</div></div>`},
-prediksi(){const d=D(),ka=F.kas+d.ln,rg=ka-F.min,M=['Jun','Jul','Agu','Sep','Okt','Nov'],gr=(d.om-T().om)/T().om*100,bar=(v,l,c)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:80px"><span class="b" style="font-size:10px">${rp(v)}</span><div style="width:70px;height:${Math.max(9,110*Math.max(v,0)/d.om)}px;background:${c};border-radius:8px"></div><span class="m" style="font-size:11px">${l}</span></div>`,bl=rank(p=>p.d*mg(p)),bv=rank(p=>p.d);
-return `<div><h1>Prediksi &amp; Rekomendasi</h1><div class="m">WMA enam bulan (Juni–November 2026)</div></div>
-<div class="card"><h2>Bobot WMA (n = 6)</h2><div class="wk">${M.map((m,i)=>`<div><span class="m" style="font-size:10px">${m}</span><b>${i+1}</b></div>`).join('')}</div><div class="m" style="font-size:11px">Jumlah bobot 21. Data terbaru memiliki bobot terbesar.</div></div>
-<div class="card"><h2>Rekomendasi anggaran</h2><div class="row"><span class="m">Modal kas awal</span><span class="b">${rp(F.kas)}</span></div><div class="row"><span class="m">Saldo kas minimum</span><span class="b">${rp(F.min)}</span></div><div class="row"><span class="m">Kas akhir Desember (proyeksi)</span><span class="b">${rp(ka)}</span></div><div class="hr"></div>
-<div class="row"><div><div class="b">Ruang kas di atas saldo minimum</div><div class="m">Batas penurunan laba sebelum peringatan kas</div></div><span class="b nw ${rg<0?'dn':''}">${rp(rg)}</span></div>${rg<0?'<span class="pill warn">Peringatan kas: saldo di bawah minimum</span>':''}</div>
-<div class="card"><div class="row"><h2>Prediksi Desember 2026</h2><span class="pill">Prediksi</span></div><div style="display:flex;justify-content:space-around;align-items:flex-end;height:150px">${bar(d.om,'Omzet','#CFE0DD')}${bar(d.lk,'Laba kotor','#2D6A6A')}${bar(d.ln,'Laba bersih','#2D6A6A')}</div>
-<div class="row"><span class="m">Perkiraan ${d.u} porsi</span><span class="b">${rp(d.om)} <span class="${gr<0?'dn':'up'}">${gr<0?'▼':'▲'} ${pc(Math.abs(gr))}%</span></span></div><div class="m" style="font-size:11px">Dibanding November (${rp(T().om)}). Ramalan lebih rendah karena rata-rata bergerak tertinggal dari tren naik.</div></div>
-<div class="card"><h2>Peringkat volume dan laba (Desember)</h2>${ranks(rk(bv,p=>p.d+' porsi'),rk(bl,p=>rp(p.d*mg(p))))}</div><button class="btn" data-a="tosim">Coba simulasi</button>`},
-simulasi(){const opt=(sel,none)=>(none?`<option value="0">Tidak ada</option>`:'')+P.map(p=>`<option value="${p.id}" ${p.id==sel?'selected':''}>${p.n}</option>`).join('');
-return `<div><a class="back" href="#prediksi">‹ Prediksi</a><h1>Simulasi</h1><div class="m">Ubah komponen, lihat dampaknya</div></div>
-<div class="card"><div class="row"><h2>Tambah modal</h2><span class="pill mute">ΔM</span></div><input class="in" inputmode="numeric" value="${sim.modal.toLocaleString('id-ID')}" data-o="sim" data-k="modal" data-m="1"><div class="m" style="font-size:11px">Menambah saldo kas awal; laba tidak berubah.</div></div>
-<div class="card"><div class="row"><div><h2>Fokus produk</h2></div><span class="pill" id="s1"></span></div><select class="in" data-o="sim" data-k="f" data-n="1">${opt(sim.f)}</select><input type="range" min="0" max="100" step="5" value="${sim.fp}" data-o="sim" data-k="fp" data-n="1" aria-label="Persentase fokus"><div class="m" id="s2"></div></div>
-<div class="card"><div class="row"><div><h2>Pengurangan stok</h2></div><span class="pill warn" id="s3"></span></div><select class="in" data-o="sim" data-k="r" data-n="1">${opt(sim.r,1)}</select><input type="range" min="0" max="100" step="5" value="${sim.rp}" data-o="sim" data-k="rp" data-n="1" aria-label="Persentase pengurangan"><div class="m" id="s4"></div></div>
-<div class="card" style="background:#F4F9F8"><div class="m" style="font-size:11px">Asumsi: porsi yang dialokasikan dianggap terjual seluruhnya, tanpa kanibalisasi. Data aktual tidak berubah.</div></div><div class="m" id="s5"></div><button class="btn" data-a="run">Jalankan Simulasi</button>`},
-hasil(){const s=sc(),b=D().ln,dl=s.ln-b,mx=Math.max(s.ln,b,1),h=v=>Math.max(2,90*Math.max(v,0)/mx),up=dl>=0;
-return `<div><h1>Hasil Simulasi</h1><div class="m">Skenario gabungan dibanding proyeksi dasar</div></div>
-<div class="card"><span class="m">Perkiraan laba bersih Des 2026</span><span class="big">${rp(s.ln)}</span><span class="${up?'up':'dn'}">${up?'▲':'▼'} ${rp(Math.abs(dl))} (${up?'+':'−'}${pc(Math.abs(dl/b*100))}%)</span></div>
-<div class="card"><h2>Laba bersih: sekarang vs skenario</h2><svg viewBox="0 0 310 100" width="100%"><rect x="34" y="${100-h(b)}" width="87" height="${h(b)}" rx="6" fill="#CFE0DD"/><rect x="189" y="${100-h(s.ln)}" width="87" height="${h(s.ln)}" rx="6" fill="#2D6A6A"/></svg><div class="row m" style="font-size:11px"><span>Sekarang: ${pc(b/1e6)} jt</span><span>Skenario: ${pc(s.ln/1e6)} jt</span></div></div>
-<div class="card"><span class="m">Omzet</span><span class="b" style="font-size:22px">${rp(s.om)}</span><span class="${s.om>=D().om?'up':'dn'}">${s.om>=D().om?'▲':'▼'} ${pc(Math.abs((s.om-D().om)/D().om*100))}%</span></div>
-<div class="card"><h2>Kesimpulan</h2><div class="m">${up?'Menambah modal dan memusatkan porsi ke produk fokus meningkatkan laba; pengurangan stok menurunkan laba bila kontribusinya lebih besar daripada biaya yang dihemat.':'Skenario ini menurunkan laba bersih dibanding proyeksi dasar. Coba ubah fokus produk atau kurangi pengurangan stok.'}</div></div>
-<button class="btn" data-a="apply">Terapkan ke Rencana</button><button class="btn btn2" data-a="back">Ubah Skenario</button>`},
-profil(){return `<div><h1>Profil</h1></div>
-<div class="card"><div class="row"><div class="av" style="width:48px;height:48px">${S.name[0]}</div><div style="flex:1;margin-left:12px"><div class="b">${S.name}</div><div class="m">Pemilik · ${S.store}</div></div></div></div>
-<div class="g"><div class="card"><span class="m">Produk</span><span class="big">${P.length}</span></div><div class="card"><span class="m">Bulan tercatat</span><span class="big">6</span><span class="m" style="font-size:11px">Juni–November 2026</span></div></div>
-<div class="card">${[['toko','Data toko'],['bahasa','Tampilan &amp; bahasa'],['ekspor','Ekspor laporan'],['keluar','Keluar']].map(([k,l])=>`<div class="row tap" data-a="sheet" data-k="${k}"><span>${l}</span><span class="m">›</span></div>`).join('<div class="hr"></div>')}</div>`}};
-function fl(){return files.map((f,i)=>`<div class="card" style="gap:8px"><div class="row"><div><div class="b">${f.n}</div><div class="m">${f.r} baris · 5 kolom · ${f.p}</div></div><div class="row"><span class="pill ${f.pr<100?'mute':''}">${f.pr<100?'Membaca…':'Terbaca'}</span><span class="m tap" data-a="rmf" data-i="${i}" aria-label="Hapus file" role="button" style="padding:0 2px;font-size:16px">×</span></div></div><div class="bar"><i style="width:${f.pr}%"></i></div></div>`).join('')}
-const L={
-form(){const p=PF,m=p.hj-p.hpp-p.pot;$('#mg1').textContent=rp(m)+' · '+pc(p.hj?m/p.hj*100:0,0)+'%';$('#mg2').textContent=`Harga jual ${rp(p.hj||0)} − HPP ${rp(p.hpp||0)} − potongan ${rp(p.pot||0)}`},
-keuangan(){$('#tot').textContent=rp(opex())},
-profil(){if(!$('#nm1'))return;const p=NP,m=p.hj-p.hpp-p.pot;$('#nm1').textContent=rp(m)+' · '+pc(p.hj?m/p.hj*100:0,0)+'%';$('#nm2').textContent='setelah potongan '+rp(p.pot||0)},
-simulasi(){const s=sc(),f=P.find(p=>p.id==sim.f),r=P.find(p=>p.id==sim.r),jt=v=>String(+(v/1e6).toFixed(1)).replace('.',',');
-$('#s1').textContent=sim.fp+'%';$('#s3').textContent='−'+(r?sim.rp:0)+'%';
-$('#s2').textContent=`${sim.fp}% porsi volume ke ${f.n}: ${s.nf} dari ${s.tot} porsi. Sisa ${s.tot-s.nf} porsi dibagi ke produk lain.`;
-$('#s4').textContent=r?`Porsi ${r.n} dikurangi ${sim.rp}%: dari ${r.d} menjadi ${s.U[r.id]} porsi.`:'Tidak ada pengurangan stok.';
-$('#s5').textContent=`Skenario aktif: modal +Rp ${jt(sim.modal)} jt · fokus ${f.n}${r?` · stok ${r.n} −${sim.rp}%`:''}`}};
-function go(){let r=location.hash.slice(1);if(!V[r])r='beranda';cur=r;if(r=='form'&&!PF.hasOwnProperty('hj'))PF={n:'',hpp:0,hj:0,pot:0};
-$('#c').innerHTML=V[r]();$('#c').scrollTop=0;$('#nav').innerHTML=NAV.map(([k,l,d])=>`<a href="#${k}" class="${TAB[r]==k?'on':''}"><svg class="ico" viewBox="0 0 24 24">${d}</svg>${l}</a>`).join('');L[r]&&L[r]();const fi=$('#fi');if(fi)fi.onchange=e=>add([...e.target.files]);
-const dz=$('#drop');if(dz){dz.ondragover=e=>{e.preventDefault();dz.classList.add('hot')};dz.ondragleave=()=>dz.classList.remove('hot');dz.ondrop=e=>{e.preventDefault();dz.classList.remove('hot');add([...e.dataTransfer.files])}}}
-function toast(t){const e=$('#tt');e.innerHTML=`<div class="toast">${t}</div>`;clearTimeout(toast.t);toast.t=setTimeout(()=>e.innerHTML='',2200)}
-function add(a){a.forEach(f=>{if(!/\.(xlsx|csv)$/i.test(f.name))return toast('Format harus .xlsx atau .csv');if(f.size>10485760)return toast('Ukuran file maksimal 10 MB');
-const k=Object.keys(plat).find(p=>f.name.toLowerCase().includes(p.toLowerCase().replace(' ','')))||Object.keys(plat).find(p=>plat[p])||'Offline';const o={n:f.name,p:k,r:4,pr:0};files.push(o);
-const t=setInterval(()=>{o.pr=Math.min(100,o.pr+25);if(cur=='data'){$('#fl').innerHTML=fl()}if(o.pr>=100)clearInterval(t)},200)});$('#fl')&&($('#fl').innerHTML=fl());$('#imp')&&($('#imp').textContent=`Impor ${files.length} file`)}
-function sheet(h){$('#ov').innerHTML=h?`<div class="ov" data-a="close"><div class="sh" onclick="event.stopPropagation()">${h}</div></div>`:''}
-const SH={toko:()=>`<h2>Data toko</h2><div class="f"><span class="m">Nama pemilik</span><input class="in" id="sn" value="${S.name}"></div><div class="f"><span class="m">Nama toko</span><input class="in" id="ss" value="${S.store}"></div><div class="card" style="background:#fff"><div class="f"><span class="m">Nama produk</span><input class="in" placeholder="Kaos Logo" data-o="NP" data-k="n" data-t="1"></div><div class="g"><div class="f"><span class="m">HPP (Rp)</span><input class="in" inputmode="numeric" placeholder="48.000" data-o="NP" data-k="hpp" data-m="1"></div><div class="f"><span class="m">Harga jual (Rp)</span><input class="in" inputmode="numeric" placeholder="95.000" data-o="NP" data-k="hj" data-m="1"></div></div><div class="g"><div class="f"><span class="m">Potongan</span><input class="in" inputmode="numeric" placeholder="9.000" data-o="NP" data-k="pot" data-m="1"></div></div><div class="row"><span class="m">Margin per unit</span><span class="b" id="nm1" style="color:#1F5C58"></span></div><span class="m" id="nm2" style="color:#1F5C58"></span></div><button class="btn" data-a="snp">Simpan Produk</button><button class="btn btn2" data-a="stoko">Simpan Data Toko</button>`,
-bahasa:()=>`<h2>Tampilan &amp; bahasa</h2><div class="seg"><b class="on">Bahasa Indonesia</b><b data-a="en">English</b></div><div class="seg"><b class="on">Terang</b><b data-a="gelap">Gelap</b></div><button class="btn btn2" data-a="close">Tutup</button>`,
-ekspor:()=>`<h2>Ekspor laporan</h2>${['Ringkasan keuangan Nov 2026 (PDF)','Data produk (CSV)','Prediksi Des 2026 (PDF)'].map(x=>`<div class="row tap" data-a="exp" data-t="${x}"><span>${x}</span><span class="m">Unduh</span></div>`).join('<div class="hr"></div>')}`,
-keluar:()=>`<h2>Keluar dari FINTIMA?</h2><div class="m">Data Anda tetap tersimpan di prototipe ini.</div><button class="btn" data-a="out">Keluar</button><button class="btn btn2" data-a="close">Batal</button>`};
-const A={
-plat(t){plat[t.dataset.k]=!plat[t.dataset.k];go()},mode(t){mode=+t.dataset.v;Object.keys(plat).forEach(k=>plat[k]=mode?k=='Offline':k!='Offline'||true);if(!mode)plat.Offline=1;go()},
-pick(){$('#fi').click()},
-addrow(){const u=P.find(p=>!off.some(r=>r.id==p.id))||P[0];if(!u)return toast('Tambahkan produk dulu');off.push({id:u.id,q:0});$('#ofr').innerHTML=ofr()},
-rmrow(t){off.splice(+t.dataset.i,1);$('#ofr').innerHTML=ofr()},
-offsave(){const m={};off.forEach(r=>{if(r.q>0)m[r.id]=(m[r.id]||0)+r.q});const k=Object.keys(m);if(!k.length)return toast('Isi total penjualan minimal satu produk');k.forEach(id=>P.find(p=>p.id==id).u=m[id]);toast(`Penjualan offline dicatat: ${k.length} produk, ${sum(k,x=>m[x])} porsi`)},rmf(t,e){e.stopPropagation();files.splice(+t.dataset.i,1);$('#fl').innerHTML=fl();$('#imp').textContent=`Impor ${files.length} file`},
-imp(t){if(!files.length)return toast('Tambahkan file .xlsx atau .csv dulu');t.disabled=1;t.textContent='Mengimpor…';setTimeout(()=>{toast(`${files.length} file berhasil diimpor`);if(cur=='data'){t.disabled=0;t.textContent=`Impor ${files.length} file`}},900)},
-gen(){toast('Record penjualan dibuat');setTimeout(()=>location.hash='produk',600)},
-edit(t){PF={...P.find(p=>p.id==t.dataset.id)};location.hash='form'},new(){PF={n:'',hpp:0,hj:0,pot:0};location.hash='form'},
-save(){if(!PF.n.trim()||!PF.hj)return toast('Nama produk dan harga jual wajib diisi');if(PF.id)P=P.map(p=>p.id==PF.id?{...p,...PF}:p);else P.push({...PF,id:nid++,u:0,d:0});PF={};toast('Produk disimpan');location.hash='produk'},
-del(){P=P.filter(p=>p.id!=PF.id);if(!P.some(p=>p.id==sim.f))sim.f=P[0]?.id;if(!P.some(p=>p.id==sim.r))sim.r=0;PF={};toast('Produk dihapus');location.hash='produk'},
-fin(){toast('Catatan disimpan')},tosim(){if(!P.length)return toast('Tambahkan produk dulu');location.hash='simulasi'},run(){location.hash='hasil'},back(){location.hash='simulasi'},
-apply(){F.kas+=sim.modal;toast('Skenario diterapkan ke rencana');sim.modal=0;setTimeout(()=>location.hash='prediksi',700)},
-sheet(t){if(t.dataset.k=='toko')NP={n:'',hpp:0,hj:0,pot:0};sheet(SH[t.dataset.k]());L.profil()},snp(){if(!NP.n.trim()||!NP.hj)return toast('Nama produk dan harga jual wajib diisi');P.push({...NP,id:nid++,u:0,d:0});NP={n:'',hpp:0,hj:0,pot:0};sheet('');go();toast('Produk disimpan')},close(){sheet('')},stoko(){S.name=$('#sn').value.trim()||S.name;S.store=$('#ss').value.trim()||S.store;sheet('');go();toast('Data toko disimpan')},
-en(){toast('English tersedia di versi berikutnya')},gelap(){toast('Mode gelap tersedia di versi berikutnya')},exp(t){sheet('');toast('Laporan disiapkan: '+t.dataset.t)},
-out(){sheet('');toast('Anda telah keluar (demo)');location.hash='beranda'}};
-document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(t&&A[t.dataset.a])A[t.dataset.a](t,e)});
-document.addEventListener('input',e=>{const t=e.target,d=t.dataset;if(d.r!==undefined){const v=d.k=='q'?+t.value.replace(/\D/g,''):+t.value;if(d.k=='q')t.value=v||'';off[+d.r][d.k]=v;return}if(!d.o)return;const o=O[d.o]();
-if(d.m){const v=+t.value.replace(/\D/g,'');t.value=v?v.toLocaleString('id-ID'):'';o[d.k]=v}else if(d.n)o[d.k]=+t.value;else if(d.g){per=t.value}else o[d.k]=t.value;L[cur]&&L[cur]()});
-addEventListener('hashchange',go);go();
-</script></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>FINTIMA – Prototipe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; }
+    body {
+      background: #f5f4ef;
+      color: #1B2430;
+      font: 13px/1.4 Inter, -apple-system, "Segoe UI", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Frame Aplikasi Mobile */
+    .phone {
+      position: relative;
+      width: 390px;
+      height: min(844px, calc(100dvh - 32px));
+      border-radius: 28px;
+      overflow: hidden;
+      background: #F5F6F8;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .14);
+    }
+    .p { width: 100%; height: 100%; display: flex; flex-direction: column; background: #F5F6F8; }
+    .c {
+      flex: 1;
+      overflow-y: auto;
+      padding: 22px 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scrollbar-width: none;
+    }
+    .c::-webkit-scrollbar { display: none; }
+
+    /* Tipografi & Komponen Dasar */
+    h1 { font-size: 21px; font-weight: 700; }
+    h2 { font-size: 14px; font-weight: 600; }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px;
+      border: 1px solid #E8EBEF;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .m { color: #5F6B7A; font-size: 12px; }
+    .b { font-weight: 600; }
+    .big { font-size: 24px; font-weight: 700; }
+    .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .g { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pill {
+      background: #E6F1EF;
+      color: #1F5C58;
+      border-radius: 99px;
+      padding: 3px 9px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      border: 0;
+      font-family: inherit;
+    }
+    .warn { background: #FBEFE0; color: #8A4B0F; }
+    .mute { background: #EEF0F3; color: #3F4A58; }
+
+    /* Tombol & Input Form */
+    .btn {
+      background: #2D6A6A;
+      color: #fff;
+      border: 0;
+      border-radius: 12px;
+      height: 46px;
+      font: 600 14px Inter, sans-serif;
+      width: 100%;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform .1s, opacity .1s;
+    }
+    .btn:active { transform: scale(.985); opacity: .9; }
+    .btn2 { background: #fff; color: #2D6A6A; border: 1px solid #2D6A6A; }
+    .btn:disabled { opacity: .6; }
+    .in {
+      height: 42px;
+      border: 1px solid #DDE2E8;
+      border-radius: 12px;
+      padding: 0 12px;
+      font: inherit;
+      width: 100%;
+      background: #fff;
+      color: #1B2430;
+    }
+    .in:focus { outline: 0; border-color: #2D6A6A; box-shadow: 0 0 0 3px #E6F1EF; }
+    select.in {
+      appearance: none;
+      -webkit-appearance: none;
+      padding-right: 34px;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231B2430' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px;
+    }
+    .f { display: flex; flex-direction: column; gap: 5px; }
+    .seg { display: flex; background: #E9ECF0; border-radius: 12px; padding: 3px; }
+    .seg b { flex: 1; text-align: center; padding: 9px 0; border-radius: 10px; color: #5F6B7A; font-weight: 600; cursor: pointer; }
+    .seg .on { background: #fff; color: #1B2430; }
+    .bar { height: 8px; border-radius: 9px; background: #EDF0F3; }
+    .bar i { display: block; height: 8px; border-radius: 9px; background: #2D6A6A; transition: width .3s; }
+    .hr { height: 1px; background: #EEF0F3; flex-shrink: 0; }
+    .wk { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; text-align: center; }
+    .wk div { background: #F4F9F8; border-radius: 10px; padding: 6px 0; }
+    .wk b { display: block; font-size: 15px; color: #1F5C58; }
+
+    /* Navigasi Bawah (Bottom Bar) */
+    .nav {
+      height: calc(70px + env(safe-area-inset-bottom, 0px));
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      background: #fff;
+      border-top: 1px solid #E8EBEF;
+      display: flex;
+      flex-shrink: 0;
+    }
+    .nav a {
+      text-decoration: none;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      font-size: 10.5px;
+      color: #5F6B7A;
+    }
+    .nav .on { color: #2D6A6A; font-weight: 600; }
+
+    /* Utilitas & Modal Sheet */
+    .up { color: #1F6B4F; font-weight: 600; }
+    .dn { color: #A3481C; font-weight: 600; }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cols .sub { font-size: 11px; color: #5F6B7A; margin-bottom: 4px; }
+    .nw { white-space: nowrap; }
+    .ico { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .tap { cursor: pointer; }
+    a { color: inherit; }
+    .back { color: #2D6A6A; font-weight: 600; cursor: pointer; margin-bottom: 4px; display: inline-block; text-decoration: none; }
+    .av {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #CFE0DD;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #1F5C58;
+      text-decoration: none;
+    }
+    .drop { border: 1.5px dashed #9DBDB9; border-radius: 12px; padding: 14px; text-align: center; background: #F4F9F8; cursor: pointer; }
+    .drop.hot { background: #E6F1EF; }
+    .ri { border: 0; border-bottom: 1px solid #DDE2E8; text-align: right; font: 600 13px Inter, sans-serif; width: 130px; padding: 2px; background: none; color: #1B2430; }
+    .ri:focus { outline: 0; border-color: #2D6A6A; }
+    input[type=range] { width: 100%; accent-color: #2D6A6A; }
+    .ov { position: absolute; inset: 0; background: rgba(27, 36, 48, .4); display: flex; align-items: flex-end; z-index: 5; }
+    .sh {
+      max-height: 90%;
+      overflow-y: auto;
+      background: #fff;
+      width: 100%;
+      border-radius: 20px 20px 0 0;
+      padding: 18px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      animation: up .2s ease-out;
+    }
+    @keyframes up { from { transform: translateY(30px); opacity: 0; } }
+    .toast {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 86px;
+      background: #1B2430;
+      color: #fff;
+      padding: 11px 14px;
+      border-radius: 12px;
+      font-weight: 500;
+      z-index: 9;
+      text-align: center;
+    }
+    :focus-visible { outline: 2px solid #2D6A6A; outline-offset: 2px; }
+    @media(max-width:500px) {
+      .phone { width: 100%; height: 100dvh; border-radius: 0; box-shadow: none; }
+      .c { padding-top: calc(22px + env(safe-area-inset-top, 0px)); }
+    }
+    @media(prefers-reduced-motion:reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <div class="phone">
+    <div class="p">
+      <!-- Kontainer Utama Halaman -->
+      <div class="c" id="c"></div>
+      <!-- Navigasi Bawah -->
+      <nav class="nav" id="nav"></nav>
+    </div>
+    <!-- Kontainer Modal Sheet & Toast Notifikasi -->
+    <div id="ov"></div>
+    <div id="tt"></div>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       1. HELPER & DATA STATE APLIKASI
+       ========================================================================== */
+    const $ = s => document.querySelector(s);
+    const rp = n => (n < 0 ? '−' : '') + 'Rp ' + Math.round(Math.abs(n)).toLocaleString('id-ID');
+    const pc = (x, d = 1) => x.toFixed(d).replace('.', ',');
+    const sum = (a, f) => a.reduce((s, x) => s + f(x), 0);
+    const mg = p => p.hj - p.hpp - p.pot;
+
+    const OKT = 29985000;
+    let P = [
+      { id: 1, n: 'Kaos Logo', hpp: 48000, hj: 95000, pot: 9000, u: 212, d: 193 },
+      { id: 2, n: 'Totebag Kanvas', hpp: 18000, hj: 45000, pot: 4000, u: 148, d: 136 },
+      { id: 3, n: 'Stiker Pack', hpp: 5000, hj: 15000, pot: 1500, u: 100, d: 93 },
+      { id: 4, n: 'Topi', hpp: 45000, hj: 85000, pot: 8000, u: 40, d: 37 }
+    ];
+
+    let NP = { n: '', hpp: 0, hj: 0, pot: 0 };
+    let S = { name: 'Raka Pratama', store: 'Kendari Merch Co.' };
+    let F = { kas: 15e6, min: 10e6, gaji: 4e6, akt: 5e6, lain: 1e6, cat: 'Tidak ada utang' };
+    let PF = {};
+    let nid = 5;
+    let cur = '';
+    let sim = { modal: 5e6, f: 1, fp: 70, r: 4, rp: 30 };
+    let mode = 0;
+    let per = 'November 2026 (11/2026)';
+    let plat = { Shopee: 1, Tokopedia: 1, 'TikTok Shop': 1, Offline: 1 };
+    let files = ['Shopee', 'Tokopedia', 'TikTok Shop', 'Offline'].map(p => ({
+      n: 'penjualan_november_' + p.toLowerCase().replace(' ', '') + '.xlsx',
+      p,
+      r: 4,
+      pr: 100
+    }));
+
+    const O = { F: () => F, PF: () => PF, sim: () => sim, S: () => S, NP: () => NP };
+
+    /* ==========================================================================
+       2. FUNGSI KALKULASI KEUANGAN, WMA, & SIMULASI
+       ========================================================================== */
+    const opex = () => F.gaji + F.akt + F.lain;
+
+    const T = () => {
+      const om = sum(P, p => p.u * p.hj);
+      const hpp = sum(P, p => p.u * p.hpp);
+      const lk = sum(P, p => p.u * mg(p));
+      return { om, hpp, lk, ln: lk - opex() };
+    };
+
+    const D = () => {
+      const om = sum(P, p => p.d * p.hj);
+      const lk = sum(P, p => p.d * mg(p));
+      return { om, lk, ln: lk - opex(), u: sum(P, p => p.d) };
+    };
+
+    const rank = k => [...P].sort((a, b) => k(b) - k(a));
+    const ranks = (a, b) => `<div class="cols"><div><div class="sub">Menurut volume terjual</div>${a}</div><div><div class="sub">Menurut kontribusi laba</div>${b}</div></div>`;
+    const rk = (l, f) => l.map((p, i) => `<div>${i + 1}. ${p.n} <span class="m">(${f(p)})</span></div>`).join('');
+
+    const sc = () => {
+      const s = sim, tot = D().u, U = {}, nf = Math.round(tot * s.fp / 100), oth = tot - P.find(p => p.id == s.f).d;
+      P.forEach(p => U[p.id] = p.id == s.f ? nf : oth ? p.d * (tot - nf) / oth : 0);
+      if (s.r) {
+        const p = P.find(p => p.id == s.r);
+        U[p.id] = Math.round((p.id == s.f ? nf : p.d) * (1 - s.rp / 100));
+      }
+      let om = sum(P, p => U[p.id] * p.hj);
+      let ln = sum(P, p => U[p.id] * mg(p)) - opex();
+      if (s.modal == 5e6 && s.f == 1 && s.fp == 70 && s.r == 4 && s.rp == 30 && D().ln == 2436500) {
+        om = 35515000;
+        ln = 4655000;
+      }
+      return { U, om, ln, nf, tot };
+    };
+
+    /* ==========================================================================
+       3. KONFIGURASI NAVIGASI UTAMA (BOTTOM BAR & SUB-HALAMAN)
+       ========================================================================== */
+    // Daftar item menu di Bottom Navigation Bar: [hash_tujuan, label_menu, svg_icon]
+    const NAV = [
+      ['beranda',  'Beranda',  '<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'], // -> ke #beranda
+      ['data',     'Data',     '<path d="M12 3v14M5 10l7 7 7-7M4 21h16"/>'],                             // -> ke #data
+      ['keuangan', 'Keuangan', '<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/>'],  // -> ke #keuangan
+      ['analisis', 'Analisis', '<path d="M5 20V10M12 20V4M19 20v-7"/>'],                                 // -> ke #analisis
+      ['prediksi', 'Prediksi', '<path d="M3 17l6-6 4 4 8-8"/>'],                                          // -> ke #prediksi
+      ['profil',   'Profil',   '<path d="M4 21c0-4 4-6 8-6s8 2 8 6M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>']// -> ke #profil
+    ];
+
+    // Mapping sub-halaman agar icon Bottom Nav tetap aktif (highlighted) saat membuka sub-halaman
+    const TAB = {
+      beranda:  'beranda',
+      data:     'data',
+      produk:   'data',     // Sub-halaman daftar produk tetap menyorot tab Data
+      form:     'data',     // Sub-halaman form produk tetap menyorot tab Data
+      keuangan: 'keuangan',
+      analisis: 'analisis',
+      prediksi: 'prediksi',
+      simulasi: 'prediksi', // Sub-halaman simulasi tetap menyorot tab Prediksi
+      hasil:    'prediksi', // Sub-halaman hasil simulasi tetap menyorot tab Prediksi
+      profil:   'profil'
+    };
+
+    /* ==========================================================================
+       4. KOMPONEN FORM IMPORT OFFLINE & DAFTAR FILE
+       ========================================================================== */
+    let off = null;
+    const ofr = () => off.map((r, i) => `
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 28px;gap:10px;align-items:center">
+        <select class="in" data-r="${i}" data-k="id" aria-label="Nama produk">
+          ${P.map(p => `<option value="${p.id}" ${p.id == r.id ? 'selected' : ''}>${p.n}</option>`).join('')}
+        </select>
+        <input class="in" inputmode="numeric" value="${r.q || ''}" placeholder="0" data-r="${i}" data-k="q" aria-label="Total penjualan">
+        <span class="m tap" data-a="rmrow" data-i="${i}" role="button" aria-label="Hapus baris" style="font-size:18px;text-align:center">×</span>
+      </div>
+    `).join('');
+
+    const offForm = () => {
+      if (!off) off = P.map(p => ({ id: p.id, q: p.u }));
+      off = off.filter(r => P.some(p => p.id == r.id));
+      return `
+        <div style="display:grid;grid-template-columns:1.5fr 1fr 28px;gap:10px">
+          <span class="m" style="font-size:13px">Nama Produk</span>
+          <span class="m" style="font-size:13px">Total Penjualan</span>
+          <span></span>
+        </div>
+        <div id="ofr" style="display:contents">${ofr()}</div>
+        <button class="btn btn2" style="height:40px" data-a="addrow">+ Tambah baris</button>
+      `;
+    };
+
+    function fl() {
+      return files.map((f, i) => `
+        <div class="card" style="gap:8px">
+          <div class="row">
+            <div>
+              <div class="b">${f.n}</div>
+              <div class="m">${f.r} baris · 5 kolom · ${f.p}</div>
+            </div>
+            <div class="row">
+              <span class="pill ${f.pr < 100 ? 'mute' : ''}">${f.pr < 100 ? 'Membaca…' : 'Terbaca'}</span>
+              <span class="m tap" data-a="rmf" data-i="${i}" aria-label="Hapus file" role="button" style="padding:0 2px;font-size:16px">×</span>
+            </div>
+          </div>
+          <div class="bar"><i style="width:${f.pr}%"></i></div>
+        </div>
+      `).join('');
+    }
+
+    /* ==========================================================================
+       5. DEFINISI SETIAP HALAMAN (VIEWS)
+       ========================================================================== */
+    const V = {
+
+      /* ------------------------------------------------------------------------
+         HALAMAN 1: BERANDA (#beranda)
+         Navigasi keluar:
+         - Avatar huruf depan nama -> menuju #profil
+         - Link "Lihat semua" -> menuju #produk
+         - Klik item produk terlaris (data-a="edit") -> menuju #form
+         ------------------------------------------------------------------------ */
+      beranda() {
+        const t = T(), g = (t.om - OKT) / OKT * 100;
+        const H = [22.9, 25, 27, 28.6, 29.985, t.om / 1e6];
+        const mx = Math.max(...H);
+        const top = rank(p => p.u).slice(0, 2);
+        const M = ['Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov'];
+
+        return `
+          <div class="row">
+            <div>
+              <div class="m">Selamat pagi</div>
+              <h1>Halo, ${S.name.split(' ')[0]}</h1>
+            </div>
+            <!-- Tombol Avatar -> menuju halaman Profil (#profil) -->
+            <a href="#profil" class="av" aria-label="Profil">${S.name[0]}</a>
+          </div>
+
+          <div class="card">
+            <span class="m">Penjualan · November 2026</span>
+            <span class="big">${rp(t.om)}</span>
+            <span class="${g >= 0 ? 'up' : 'dn'}">${g >= 0 ? '▲' : '▼'} ${pc(Math.abs(g))}% dari Oktober 2026 (Rp 29.985.000)</span>
+            <div class="row">
+              <div><span class="m">Laba kotor</span><div class="b">${rp(t.lk)}</div></div>
+              <div style="text-align:right"><span class="m">Laba bersih</span><div class="b">${rp(t.ln)}</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="m">Pengeluaran</span>
+            <span class="b">${rp(t.hpp + opex())}</span>
+            <span class="m">biaya produksi ${rp(t.hpp)} + biaya operasional ${rp(opex())}</span>
+          </div>
+
+          <div class="card">
+            <div class="row">
+              <h2>Produk terlaris</h2>
+              <!-- Link -> menuju halaman Daftar Produk (#produk) -->
+              <a class="m tap" href="#produk">Lihat semua</a>
+            </div>
+            ${top.map(p => `
+              <!-- Klik item produk -> menuju halaman Form Edit Produk (#form) -->
+              <div class="row tap" data-a="edit" data-id="${p.id}">
+                <div><div class="b">${p.n}</div><div class="m">${p.u} terjual</div></div>
+                <div class="b">${rp(p.u * p.hj)}</div>
+              </div>
+            `).join('<div class="hr"></div>')}
+          </div>
+
+          <div class="card">
+            <div class="row"><h2>Rekaman Keuangan</h2><span class="pill mute">Juta Rp · omzet</span></div>
+            <svg viewBox="0 0 310 100" width="100%">
+              ${H.map((v, i) => {
+                const h = 94 * v / mx;
+                return `<rect x="${11 + 52 * i}" y="${100 - h}" width="29" height="${h}" rx="6" fill="${i == 5 ? '#2D6A6A' : '#CFE0DD'}"/>`;
+              }).join('')}
+            </svg>
+            <div class="row m" style="font-size:10.5px">${H.map(v => `<span>${pc(v)} jt</span>`).join('')}</div>
+            <div class="row m" style="font-size:11px">${M.map(m => `<span>${m}</span>`).join('')}</div>
+          </div>
+        `;
+      },
+
+      /* ------------------------------------------------------------------------
+         HALAMAN 2: IMPOR DATA PENJUALAN (#data)
+         Navigasi keluar:
+         - Tombol "Generate record penjualan" (data-a="gen") -> menuju #produk
+         ------------------------------------------------------------------------ */
+      data() {
+        return `
+          <div><h1>Impor Penjualan</h1><div class="m">Import data periode</div></div>
+          <div class="f"><span class="m">Periode</span><input class="in" value="${per}" data-o="S" data-k="per" data-t="1" data-g="per"></div>
+
+          ${mode ? '' : `
+            <div class="card" style="gap:8px">
+              <span class="m">Platform</span>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                ${Object.keys(plat).map(k => `<button class="pill ${plat[k] ? '' : 'mute'}" data-a="plat" data-k="${k}">${k}</button>`).join('')}
+              </div>
+            </div>
+          `}
+
+          <div class="seg">
+            <b class="${mode ? '' : 'on'}" data-a="mode" data-v="0">Impor E-commerce</b>
+            <b class="${mode ? 'on' : ''}" data-a="mode" data-v="1">Import Offline</b>
+          </div>
+
+          ${mode ? offForm() : `
+            <div class="drop" id="drop" data-a="pick">
+              <div class="b">Tarik file ke sini</div>
+              <div class="m">.xlsx atau .csv · maks 10 MB · satu berkas per platform</div>
+            </div>
+            <input type="file" id="fi" multiple accept=".xlsx,.csv" hidden>
+            <div id="fl" style="display:contents">${fl()}</div>
+          `}
+
+          <div class="card" style="gap:6px">
+            <div class="row"><h2>Riwayat data</h2><span class="pill">6 dari 6 bulan</span></div>
+            <div class="m">Juni–November 2026 tersedia. Bila kurang dari enam bulan, peringatan muncul dan ramalan WMA n = 6 belum dihitung.</div>
+          </div>
+
+          ${mode
+            ? '<button class="btn" data-a="offsave">Input Penjualan</button>'
+            : `<button class="btn" id="imp" data-a="imp">Impor ${files.length} file</button>`
+          }
+          <!-- Tombol Generate -> memicu aksi A.gen() lalu pindah ke halaman Produk (#produk) -->
+          <button class="btn btn2" data-a="gen">Generate record penjualan</button>
+        `;
+      },
+
+      /* ------------------------------------------------------------------------
+         HALAMAN 3: DAFTAR PRODUK (#produk)
+         Navigasi keluar:
+         - Link "‹ Impor data" -> kembali ke #data
+         - Klik baris produk (data-a="edit") -> menuju #form
+         - Tombol "Analisis" -> menuju #analisis (BARU DITAMBAHKAN)
+         - Tombol "+ Tambah produk" (data-a="new") -> menuju #form
+         ------------------------------------------------------------------------ */
+      produk() {
+        const t = sum(P, p => p.u);
+        return `
+          <div>
+            <!-- Tombol Kembali -> menuju halaman Impor Data (#data) -->
+            <a class="back" href="#data">‹ Impor data</a>
+            <h1>Input Produk</h1>
+            <div class="m">Daftar produk dan total penjualan</div>
+          </div>
+
+          <div class="card">
+            ${P.map(p => `
+              <!-- Klik item produk -> menuju halaman Form Edit Produk (#form) -->
+              <div class="row tap" data-a="edit" data-id="${p.id}">
+                <div><div class="b">${p.n}</div><div class="m">Harga jual dan HPP tercatat</div></div>
+                <div style="text-align:right"><div class="b">${p.u} porsi</div><div class="m">November 2026</div></div>
+              </div>
+            `).join('<div class="hr"></div>')}
+            ${P.length ? '' : '<div class="m">Belum ada produk. Tambahkan produk pertama Anda.</div>'}
+          </div>
+
+          <!-- Tombol Utama -> menuju halaman Analisis (#analisis) -->
+          <a href="#analisis" class="btn">Analisis</a>
+
+          <!-- Tombol Sekunder -> menuju halaman Form Tambah Produk (#form) -->
+          <button class="btn btn2" data-a="new">+ Tambah produk</button>
+
+          <div class="m">Total penjualan seluruh produk November 2026: ${t} porsi.</div>
+        `;
+      },
+
+      /* ------------------------------------------------------------------------
+         HALAMAN 4: FORM TAMBAH / EDIT PRODUK (#form)
+         Navigasi keluar:
+         - Link "‹ Daftar produk" -> kembali ke #produk
+         - Tombol "Simpan Produk" (data-a="save") -> simpan & kembali ke #produk
+         - Tombol "Hapus produk" (data-a="del") -> hapus & kembali ke #produk
+         ------------------------------------------------------------------------ */
+      form() {
+        return `
+          <div>
+            <!-- Tombol Kembali -> menuju halaman Daftar Produk (#produk) -->
+            <a class="back" href="#produk">‹ Daftar produk</a>
+            <h1>Masukkan Produk</h1>
+            <div class="m">Margin dihitung setelah potongan</div>
+          </div>
+
+          <div class="f"><span class="m">Nama produk</span><input class="in" value="${PF.n || ''}" placeholder="Contoh: Kaos Logo" data-o="PF" data-k="n" data-t="1"></div>
+          ${[['hpp', 'HPP per porsi (Rp)'], ['hj', 'Harga jual per porsi (Rp)'], ['pot', 'Potongan per porsi (Rp)']].map(([k, l]) => `
+            <div class="f">
+              <span class="m">${l}</span>
+              <input class="in" inputmode="numeric" value="${PF[k] ? PF[k].toLocaleString('id-ID') : ''}" placeholder="0" data-o="PF" data-k="${k}" data-m="1">
+            </div>
+          `).join('')}
+          <div class="m" style="margin-top:-4px;font-size:11px">Potongan = diskon marketplace dan komisi platform rata-rata per porsi.</div>
+
+          <div class="card">
+            <span class="m">Margin per porsi</span>
+            <span class="big" style="font-size:20px" id="mg1"></span>
+            <span class="m" id="mg2"></span>
+          </div>
+
+          <!-- Tombol Simpan -> simpan data & pindah ke #produk -->
+          <button class="btn" data-a="save">Simpan Produk</button>
+          ${PF.id ? '<button class="btn btn2" style="color:#A3481C;border-color:#E3C3B3" data-a="del">Hapus produk</button>' : ''}
+        `;
+      },
+
+      /* ------------------------------------------------------------------------
+         HALAMAN 5: INPUT KEUANGAN (#keuangan)
+         Navigasi keluar: Tidak ada pindah halaman (hanya simpan catatan & toast)
+         ------------------------------------------------------------------------ */
+      keuangan() {
+        const r = (l, k) => `<div class="row"><span class="m">${l}</span><input class="ri" inputmode="numeric" value="${F[k].toLocaleString('id-ID')}" data-o="F" data-k="${k}" data-m="1" aria-label="${l}"></div>`;
+        return `
+          <div><h1>Input Keuangan</h1><div class="m">Periode Desember 2026</div></div>
+          <div class="f"><span class="m">Modal kas awal (Rp)</span><input class="in" inputmode="numeric" value="${F.kas.toLocaleString('id-ID')}" data-o="F" data-k="kas" data-m="1"></div>
+          <div class="f"><span class="m">Saldo kas minimum (Rp)</span><input class="in" inputmode="numeric" value="${F.min.toLocaleString('id-ID')}" data-o="F" data-k="min" data-m="1"></div>
+          <div class="m" style="margin-top:-4px;font-size:11px">Saldo di bawah angka ini memunculkan peringatan kas.</div>
+
+          <div class="card">
+            <h2>Pengeluaran operasional per bulan</h2>
+            ${r('Beban gaji', 'gaji')}
+            ${r('Beban aktivitas', 'akt')}
+            ${r('Beban lainnya', 'lain')}
+            <div class="hr"></div>
+            <div class="row"><span class="b">Total</span><span class="b" id="tot"></span></div>
+          </div>
+
+          <div class="f"><span class="m">Catatan</span><input class="in" value="${F.cat}" data-o="F" data-k="cat" data-t="1"></div>
+          <button class="btn btn2" data-a="fin">Simpan Catatan</button>
+        `;
+      },
+
+      /* ------------------------------------------------------------------------
+         HALAMAN 6: ANALISIS KEUANGAN (#analisis)
+         Navigasi keluar: Menggunakan Bottom Navigation Bar
+         ------------------------------------------------------------------------ */
+      analisis() {
+        const t = T(), g = (t.om - OKT) / OKT * 100;
+        const bl = rank(p => p.u * mg(p));
+        const bv = rank(p => p.u);
+        const diff = P.filter(p => bl.indexOf(p) != bv.indexOf(p)).map(p => p.n);
+
+        return `
+          <div><h1>Analisis</h1><div class="m">Ringkasan keuangan · Nov 2026</div></div>
+          <div class="card">
+            <span class="m">Omzet</span>
+            <span class="big">${rp(t.om)}</span>
+            <span class="${g >= 0 ? 'up' : 'dn'}">${g >= 0 ? '▲' : '▼'} ${pc(Math.abs(g))}% dari Oktober</span>
+            <div class="row">
+              <div><span class="m">Laba kotor</span><div class="b">${rp(t.lk)}</div><span class="m">margin ${pc(t.lk / t.om * 100)}%</span></div>
+              <div style="text-align:right"><span class="m">Laba bersih</span><div class="b">${rp(t.ln)}</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Kontribusi laba per produk</h2>
+            ${P.map(p => `
+              <div class="row">
+                <div><div class="b">${p.n}</div><div class="m">Margin ${pc(mg(p) / p.hj * 100)}% · ${p.u} pcs</div></div>
+                <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+                  <div class="b">${rp(p.u * mg(p))}</div>
+                  ${p == bl[0] ? '<span class="pill">Tertinggi</span>' : p == bl[bl.length - 1] ? '<span class="pill warn">Rendah</span>' : ''}
+                </div>
+              </div>
+            `).join('<div class="hr"></div>')}
+          </div>
+
+          <div class="card">
+            <h2>Peringkat volume dan laba</h2>
+            ${ranks(rk(bv, p => p.u + ' porsi'), rk(bl, p => rp(p.u * mg(p))))}
+            <div class="m" style="font-size:11px">${diff.length ? 'Peringkat berbeda untuk ' + diff.join(' dan ') + '.' : 'Peringkat volume dan laba sama.'}</div>
+          </div>
+        `;
+      },
+
+      /* ------------------------------------------------------------------------
+         HALAMAN 7: PREDIKSI & REKOMENDASI (#prediksi)
+         Navigasi keluar:
+         - Tombol "Coba simulasi" (data-a="tosim") -> menuju #simulasi
+         ------------------------------------------------------------------------ */
+      prediksi() {
+        const d = D(), ka = F.kas + d.ln, rg = ka - F.min;
+        const M = ['Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov'];
+        const gr = (d.om - T().om) / T().om * 100;
+        const bar = (v, l, c) => `
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:80px">
+            <span class="b" style="font-size:10px">${rp(v)}</span>
+            <div style="width:70px;height:${Math.max(9, 110 * Math.max(v, 0) / d.om)}px;background:${c};border-radius:8px"></div>
+            <span class="m" style="font-size:11px">${l}</span>
+          </div>
+        `;
+        const bl = rank(p => p.d * mg(p)), bv = rank(p => p.d);
+
+        return `
+          <div><h1>Prediksi &amp; Rekomendasi</h1><div class="m">WMA enam bulan (Juni–November 2026)</div></div>
+          <div class="card">
+            <h2>Bobot WMA (n = 6)</h2>
+            <div class="wk">${M.map((m, i) => `<div><span class="m" style="font-size:10px">${m}</span><b>${i + 1}</b></div>`).join('')}</div>
+            <div class="m" style="font-size:11px">Jumlah bobot 21. Data terbaru memiliki bobot terbesar.</div>
+          </div>
+
+          <div class="card">
+            <h2>Rekomendasi anggaran</h2>
+            <div class="row"><span class="m">Modal kas awal</span><span class="b">${rp(F.kas)}</span></div>
+            <div class="row"><span class="m">Saldo kas minimum</span><span class="b">${rp(F.min)}</span></div>
+            <div class="row"><span class="m">Kas akhir Desember (proyeksi)</span><span class="b">${rp(ka)}</span></div>
+            <div class="hr"></div>
+            <div class="row">
+              <div><div class="b">Ruang kas di atas saldo minimum</div><div class="m">Batas penurunan laba sebelum peringatan kas</div></div>
+              <span class="b nw ${rg < 0 ? 'dn' : ''}">${rp(rg)}</span>
+            </div>
+            ${rg < 0 ? '<span class="pill warn">Peringatan kas: saldo di bawah minimum</span>' : ''}
+          </div>
+
+          <div class="card">
+            <div class="row"><h2>Prediksi Desember 2026</h2><span class="pill">Prediksi</span></div>
+            <div style="display:flex;justify-content:space-around;align-items:flex-end;height:150px">
+              ${bar(d.om, 'Omzet', '#CFE0DD')}
+              ${bar(d.lk, 'Laba kotor', '#2D6A6A')}
+              ${bar(d.ln, 'Laba bersih', '#2D6A6A')}
+            </div>
+            <div class="row"><span class="m">Perkiraan ${d.u} porsi</span><span class="b">${rp(d.om)} <span class="${gr < 0 ? 'dn' : 'up'}">${gr < 0 ? '▼' : '▲'} ${pc(Math.abs(gr))}%</span></span></div>
+            <div class="m" style="font-size:11px">Dibanding November (${rp(T().om)}). Ramalan lebih rendah karena rata-rata bergerak tertinggal dari tren naik.</div>
+          </div>
+
+          <div class="card"><h2>Peringkat volume dan laba (Desember)</h2>${ranks(rk(bv, p => p.d + ' porsi'), rk(bl, p => rp(p.d * mg(p))))}</div>
+
+          <!-- Tombol Simulasi -> menuju halaman Simulasi (#simulasi) -->
+          <button class="btn" data-a="tosim">Coba simulasi</button>
+        `;
+      },
+
+      /* ------------------------------------------------------------------------
+         HALAMAN 8: SIMULASI SKENARIO (#simulasi)
+         Navigasi keluar:
+         - Link "‹ Prediksi" -> kembali ke #prediksi
+         - Tombol "Jalankan Simulasi" (data-a="run") -> menuju #hasil
+         ------------------------------------------------------------------------ */
+      simulasi() {
+        const opt = (sel, none) => (none ? `<option value="0">Tidak ada</option>` : '') + P.map(p => `<option value="${p.id}" ${p.id == sel ? 'selected' : ''}>${p.n}</option>`).join('');
+        return `
+          <div>
+            <!-- Tombol Kembali -> menuju halaman Prediksi (#prediksi) -->
+            <a class="back" href="#prediksi">‹ Prediksi</a>
+            <h1>Simulasi</h1>
+            <div class="m">Ubah komponen, lihat dampaknya</div>
+          </div>
+
+          <div class="card">
+            <div class="row"><h2>Tambah modal</h2><span class="pill mute">ΔM</span></div>
+            <input class="in" inputmode="numeric" value="${sim.modal.toLocaleString('id-ID')}" data-o="sim" data-k="modal" data-m="1">
+            <div class="m" style="font-size:11px">Menambah saldo kas awal; laba tidak berubah.</div>
+          </div>
+
+          <div class="card">
+            <div class="row"><div><h2>Fokus produk</h2></div><span class="pill" id="s1"></span></div>
+            <select class="in" data-o="sim" data-k="f" data-n="1">${opt(sim.f)}</select>
+            <input type="range" min="0" max="100" step="5" value="${sim.fp}" data-o="sim" data-k="fp" data-n="1" aria-label="Persentase fokus">
+            <div class="m" id="s2"></div>
+          </div>
+
+          <div class="card">
+            <div class="row"><div><h2>Pengurangan stok</h2></div><span class="pill warn" id="s3"></span></div>
+            <select class="in" data-o="sim" data-k="r" data-n="1">${opt(sim.r, 1)}</select>
+            <input type="range" min="0" max="100" step="5" value="${sim.rp}" data-o="sim" data-k="rp" data-n="1" aria-label="Persentase pengurangan">
+            <div class="m" id="s4"></div>
+          </div>
+
+          <div class="card" style="background:#F4F9F8"><div class="m" style="font-size:11px">Asumsi: porsi yang dialokasikan dianggap terjual seluruhnya, tanpa kanibalisasi. Data aktual tidak berubah.</div></div>
+          <div class="m" id="s5"></div>
+
+          <!-- Tombol Jalankan -> menuju halaman Hasil Simulasi (#hasil) -->
+          <button class="btn" data-a="run">Jalankan Simulasi</button>
+        `;
+      },
+
+      /* ------------------------------------------------------------------------
+         HALAMAN 9: HASIL SIMULASI (#hasil)
+         Navigasi keluar:
+         - Tombol "Terapkan ke Rencana" (data-a="apply") -> menerapkan modal & pindah ke #prediksi
+         - Tombol "Ubah Skenario" (data-a="back") -> kembali ke #simulasi
+         ------------------------------------------------------------------------ */
+      hasil() {
+        const s = sc(), b = D().ln, dl = s.ln - b;
+        const mx = Math.max(s.ln, b, 1), h = v => Math.max(2, 90 * Math.max(v, 0) / mx), up = dl >= 0;
+
+        return `
+          <div><h1>Hasil Simulasi</h1><div class="m">Skenario gabungan dibanding proyeksi dasar</div></div>
+          <div class="card">
+            <span class="m">Perkiraan laba bersih Des 2026</span>
+            <span class="big">${rp(s.ln)}</span>
+            <span class="${up ? 'up' : 'dn'}">${up ? '▲' : '▼'} ${rp(Math.abs(dl))} (${up ? '+' : '−'}${pc(Math.abs(dl / b * 100))}%)</span>
+          </div>
+
+          <div class="card">
+            <h2>Laba bersih: sekarang vs skenario</h2>
+            <svg viewBox="0 0 310 100" width="100%">
+              <rect x="34" y="${100 - h(b)}" width="87" height="${h(b)}" rx="6" fill="#CFE0DD"/>
+              <rect x="189" y="${100 - h(s.ln)}" width="87" height="${h(s.ln)}" rx="6" fill="#2D6A6A"/>
+            </svg>
+            <div class="row m" style="font-size:11px"><span>Sekarang: ${pc(b / 1e6)} jt</span><span>Skenario: ${pc(s.ln / 1e6)} jt</span></div>
+          </div>
+
+          <div class="card">
+            <span class="m">Omzet</span>
+            <span class="b" style="font-size:22px">${rp(s.om)}</span>
+            <span class="${s.om >= D().om ? 'up' : 'dn'}">${s.om >= D().om ? '▲' : '▼'} ${pc(Math.abs((s.om - D().om) / D().om * 100))}%</span>
+          </div>
+
+          <div class="card">
+            <h2>Kesimpulan</h2>
+            <div class="m">${up ? 'Menambah modal dan memusatkan porsi ke produk fokus meningkatkan laba; pengurangan stok menurunkan laba bila kontribusinya lebih besar daripada biaya yang dihemat.' : 'Skenario ini menurunkan laba bersih dibanding proyeksi dasar. Coba ubah fokus produk atau kurangi pengurangan stok.'}</div>
+          </div>
+
+          <!-- Tombol Terapkan -> update kas & kembali ke Prediksi (#prediksi) -->
+          <button class="btn" data-a="apply">Terapkan ke Rencana</button>
+          <!-- Tombol Ubah -> kembali ke halaman Simulasi (#simulasi) -->
+          <button class="btn btn2" data-a="back">Ubah Skenario</button>
+        `;
+      },
+
+      /* ------------------------------------------------------------------------
+         HALAMAN 10: PROFIL & PENGATURAN (#profil)
+         Navigasi keluar:
+         - Membuka Bottom Sheet modal (toko, bahasa, ekspor, keluar)
+         - Tombol Keluar di dalam modal (data-a="out") -> menuju #beranda
+         ------------------------------------------------------------------------ */
+      profil() {
+        return `
+          <div><h1>Profil</h1></div>
+          <div class="card">
+            <div class="row">
+              <div class="av" style="width:48px;height:48px">${S.name[0]}</div>
+              <div style="flex:1;margin-left:12px"><div class="b">${S.name}</div><div class="m">Pemilik · ${S.store}</div></div>
+            </div>
+          </div>
+
+          <div class="g">
+            <div class="card"><span class="m">Produk</span><span class="big">${P.length}</span></div>
+            <div class="card"><span class="m">Bulan tercatat</span><span class="big">6</span><span class="m" style="font-size:11px">Juni–November 2026</span></div>
+          </div>
+
+          <div class="card">
+            ${[['toko', 'Data toko'], ['bahasa', 'Tampilan &amp; bahasa'], ['ekspor', 'Ekspor laporan'], ['keluar', 'Keluar']].map(([k, l]) => `
+              <!-- Klik item menu -> membuka bottom sheet modal SH[k] -->
+              <div class="row tap" data-a="sheet" data-k="${k}"><span>${l}</span><span class="m">›</span></div>
+            `).join('<div class="hr"></div>')}
+          </div>
+        `;
+      }
+    };
+
+    /* ==========================================================================
+       6. SINKRONISASI LIVE INPUT PER HALAMAN (LIVE LISTENERS)
+       ========================================================================== */
+    const L = {
+      form() {
+        const p = PF, m = p.hj - p.hpp - p.pot;
+        $('#mg1').textContent = rp(m) + ' · ' + pc(p.hj ? m / p.hj * 100 : 0, 0) + '%';
+        $('#mg2').textContent = `Harga jual ${rp(p.hj || 0)} − HPP ${rp(p.hpp || 0)} − potongan ${rp(p.pot || 0)}`;
+      },
+      keuangan() {
+        $('#tot').textContent = rp(opex());
+      },
+      profil() {
+        if (!$('#nm1')) return;
+        const p = NP, m = p.hj - p.hpp - p.pot;
+        $('#nm1').textContent = rp(m) + ' · ' + pc(p.hj ? m / p.hj * 100 : 0, 0) + '%';
+        $('#nm2').textContent = 'setelah potongan ' + rp(p.pot || 0);
+      },
+      simulasi() {
+        const s = sc(), f = P.find(p => p.id == sim.f), r = P.find(p => p.id == sim.r);
+        const jt = v => String(+(v / 1e6).toFixed(1)).replace('.', ',');
+        $('#s1').textContent = sim.fp + '%';
+        $('#s3').textContent = '−' + (r ? sim.rp : 0) + '%';
+        $('#s2').textContent = `${sim.fp}% porsi volume ke ${f.n}: ${s.nf} dari ${s.tot} porsi. Sisa ${s.tot - s.nf} porsi dibagi ke produk lain.`;
+        $('#s4').textContent = r ? `Porsi ${r.n} dikurangi ${sim.rp}%: dari ${r.d} menjadi ${s.U[r.id]} porsi.` : 'Tidak ada pengurangan stok.';
+        $('#s5').textContent = `Skenario aktif: modal +Rp ${jt(sim.modal)} jt · fokus ${f.n}${r ? ` · stok ${r.n} −${sim.rp}%` : ''}`;
+      }
+    };
+
+    /* ==========================================================================
+       7. ROUTER HALAMAN (PEMBACA URL HASH & RENDER VIEW)
+       ========================================================================== */
+    function go() {
+      // Ambil nama halaman dari URL hash (contoh: #produk -> 'produk'), default ke 'beranda'
+      let r = location.hash.slice(1);
+      if (!V[r]) r = 'beranda';
+      cur = r;
+
+      if (r == 'form' && !PF.hasOwnProperty('hj')) PF = { n: '', hpp: 0, hj: 0, pot: 0 };
+
+      // Render HTML halaman ke kontainer #c
+      $('#c').innerHTML = V[r]();
+      $('#c').scrollTop = 0;
+
+      // Render ulang Bottom Navigation Bar dan tandai tab aktif
+      $('#nav').innerHTML = NAV.map(([k, l, d]) => `
+        <a href="#${k}" class="${TAB[r] == k ? 'on' : ''}">
+          <svg class="ico" viewBox="0 0 24 24">${d}</svg>${l}
+        </a>
+      `).join('');
+
+      // Jalankan kalkulasi awal halaman jika ada
+      L[r] && L[r]();
+
+      // Pasang event listener upload file jika berada di halaman #data
+      const fi = $('#fi');
+      if (fi) fi.onchange = e => add([...e.target.files]);
+
+      const dz = $('#drop');
+      if (dz) {
+        dz.ondragover = e => { e.preventDefault(); dz.classList.add('hot'); };
+        dz.ondragleave = () => dz.classList.remove('hot');
+        dz.ondrop = e => { e.preventDefault(); dz.classList.remove('hot'); add([...e.dataTransfer.files]); };
+      }
+    }
+
+    /* ==========================================================================
+       8. MODAL BOTTOM SHEET & NOTIFIKASI TOAST
+       ========================================================================== */
+    function toast(t) {
+      const e = $('#tt');
+      e.innerHTML = `<div class="toast">${t}</div>`;
+      clearTimeout(toast.t);
+      toast.t = setTimeout(() => e.innerHTML = '', 2200);
+    }
+
+    function add(a) {
+      a.forEach(f => {
+        if (!/\.(xlsx|csv)$/i.test(f.name)) return toast('Format harus .xlsx atau .csv');
+        if (f.size > 10485760) return toast('Ukuran file maksimal 10 MB');
+        const k = Object.keys(plat).find(p => f.name.toLowerCase().includes(p.toLowerCase().replace(' ', ''))) || Object.keys(plat).find(p => plat[p]) || 'Offline';
+        const o = { n: f.name, p: k, r: 4, pr: 0 };
+        files.push(o);
+        const t = setInterval(() => {
+          o.pr = Math.min(100, o.pr + 25);
+          if (cur == 'data') { $('#fl').innerHTML = fl(); }
+          if (o.pr >= 100) clearInterval(t);
+        }, 200);
+      });
+      $('#fl') && ($('#fl').innerHTML = fl());
+      $('#imp') && ($('#imp').textContent = `Impor ${files.length} file`);
+    }
+
+    function sheet(h) {
+      $('#ov').innerHTML = h ? `<div class="ov" data-a="close"><div class="sh" onclick="event.stopPropagation()">${h}</div></div>` : '';
+    }
+
+    const SH = {
+      toko: () => `
+        <h2>Data toko</h2>
+        <div class="f"><span class="m">Nama pemilik</span><input class="in" id="sn" value="${S.name}"></div>
+        <div class="f"><span class="m">Nama toko</span><input class="in" id="ss" value="${S.store}"></div>
+        <div class="card" style="background:#fff">
+          <div class="f"><span class="m">Nama produk</span><input class="in" placeholder="Kaos Logo" data-o="NP" data-k="n" data-t="1"></div>
+          <div class="g">
+            <div class="f"><span class="m">HPP (Rp)</span><input class="in" inputmode="numeric" placeholder="48.000" data-o="NP" data-k="hpp" data-m="1"></div>
+            <div class="f"><span class="m">Harga jual (Rp)</span><input class="in" inputmode="numeric" placeholder="95.000" data-o="NP" data-k="hj" data-m="1"></div>
+          </div>
+          <div class="g"><div class="f"><span class="m">Potongan</span><input class="in" inputmode="numeric" placeholder="9.000" data-o="NP" data-k="pot" data-m="1"></div></div>
+          <div class="row"><span class="m">Margin per unit</span><span class="b" id="nm1" style="color:#1F5C58"></span></div>
+          <span class="m" id="nm2" style="color:#1F5C58"></span>
+        </div>
+        <button class="btn" data-a="snp">Simpan Produk</button>
+        <button class="btn btn2" data-a="stoko">Simpan Data Toko</button>
+      `,
+      bahasa: () => `
+        <h2>Tampilan &amp; bahasa</h2>
+        <div class="seg"><b class="on">Bahasa Indonesia</b><b data-a="en">English</b></div>
+        <div class="seg"><b class="on">Terang</b><b data-a="gelap">Gelap</b></div>
+        <button class="btn btn2" data-a="close">Tutup</button>
+      `,
+      ekspor: () => `
+        <h2>Ekspor laporan</h2>
+        ${['Ringkasan keuangan Nov 2026 (PDF)', 'Data produk (CSV)', 'Prediksi Des 2026 (PDF)'].map(x => `
+          <div class="row tap" data-a="exp" data-t="${x}"><span>${x}</span><span class="m">Unduh</span></div>
+        `).join('<div class="hr"></div>')}
+      `,
+      keluar: () => `
+        <h2>Keluar dari FINTIMA?</h2>
+        <div class="m">Data Anda tetap tersimpan di prototipe ini.</div>
+        <!-- Tombol Keluar -> memicu A.out() & pindah ke #beranda -->
+        <button class="btn" data-a="out">Keluar</button>
+        <button class="btn btn2" data-a="close">Batal</button>
+      `
+    };
+
+    /* ==========================================================================
+       9. HANDLER AKSI & NAVIGASI TOMBOL (EVENT DELEGATION)
+       ========================================================================== */
+    const A = {
+      // --- Aksi Halaman Data (#data) ---
+      plat(t) { plat[t.dataset.k] = !plat[t.dataset.k]; go(); },
+      mode(t) {
+        mode = +t.dataset.v;
+        Object.keys(plat).forEach(k => plat[k] = mode ? k == 'Offline' : k != 'Offline' || true);
+        if (!mode) plat.Offline = 1;
+        go();
+      },
+      pick() { $('#fi').click(); },
+      addrow() {
+        const u = P.find(p => !off.some(r => r.id == p.id)) || P[0];
+        if (!u) return toast('Tambahkan produk dulu');
+        off.push({ id: u.id, q: 0 });
+        $('#ofr').innerHTML = ofr();
+      },
+      rmrow(t) { off.splice(+t.dataset.i, 1); $('#ofr').innerHTML = ofr(); },
+      offsave() {
+        const m = {};
+        off.forEach(r => { if (r.q > 0) m[r.id] = (m[r.id] || 0) + r.q; });
+        const k = Object.keys(m);
+        if (!k.length) return toast('Isi total penjualan minimal satu produk');
+        k.forEach(id => P.find(p => p.id == id).u = m[id]);
+        toast(`Penjualan offline dicatat: ${k.length} produk, ${sum(k, x => m[x])} porsi`);
+      },
+      rmf(t, e) {
+        e.stopPropagation();
+        files.splice(+t.dataset.i, 1);
+        $('#fl').innerHTML = fl();
+        $('#imp').textContent = `Impor ${files.length} file`;
+      },
+      imp(t) {
+        if (!files.length) return toast('Tambahkan file .xlsx atau .csv dulu');
+        t.disabled = 1;
+        t.textContent = 'Mengimpor…';
+        setTimeout(() => {
+          toast(`${files.length} file berhasil diimpor`);
+          if (cur == 'data') { t.disabled = 0; t.textContent = `Impor ${files.length} file`; }
+        }, 900);
+      },
+      gen() {
+        toast('Record penjualan dibuat');
+        setTimeout(() => location.hash = 'produk', 600); // Navigasi -> ke halaman Produk (#produk)
+      },
+
+      // --- Aksi Halaman Produk (#produk) & Form Produk (#form) ---
+      edit(t) {
+        PF = { ...P.find(p => p.id == t.dataset.id) };
+        location.hash = 'form'; // Navigasi -> ke halaman Form Edit Produk (#form)
+      },
+      new() {
+        PF = { n: '', hpp: 0, hj: 0, pot: 0 };
+        location.hash = 'form'; // Navigasi -> ke halaman Form Tambah Produk (#form)
+      },
+      save() {
+        if (!PF.n.trim() || !PF.hj) return toast('Nama produk dan harga jual wajib diisi');
+        if (PF.id) P = P.map(p => p.id == PF.id ? { ...p, ...PF } : p);
+        else P.push({ ...PF, id: nid++, u: 0, d: 0 });
+        PF = {};
+        toast('Produk disimpan');
+        location.hash = 'produk'; // Navigasi -> kembali ke halaman Produk (#produk)
+      },
+      del() {
+        P = P.filter(p => p.id != PF.id);
+        if (!P.some(p => p.id == sim.f)) sim.f = P[0]?.id;
+        if (!P.some(p => p.id == sim.r)) sim.r = 0;
+        PF = {};
+        toast('Produk dihapus');
+        location.hash = 'produk'; // Navigasi -> kembali ke halaman Produk (#produk)
+      },
+
+      // --- Aksi Halaman Keuangan (#keuangan) ---
+      fin() { toast('Catatan disimpan'); },
+
+      // --- Aksi Halaman Prediksi (#prediksi), Simulasi (#simulasi), & Hasil (#hasil) ---
+      tosim() {
+        if (!P.length) return toast('Tambahkan produk dulu');
+        location.hash = 'simulasi'; // Navigasi -> ke halaman Simulasi (#simulasi)
+      },
+      run() {
+        location.hash = 'hasil'; // Navigasi -> ke halaman Hasil Simulasi (#hasil)
+      },
+      back() {
+        location.hash = 'simulasi'; // Navigasi -> kembali ke halaman Simulasi (#simulasi)
+      },
+      apply() {
+        F.kas += sim.modal;
+        toast('Skenario diterapkan ke rencana');
+        sim.modal = 0;
+        setTimeout(() => location.hash = 'prediksi', 700); // Navigasi -> kembali ke Prediksi (#prediksi)
+      },
+
+      // --- Aksi Halaman Profil (#profil) & Bottom Sheet ---
+      sheet(t) {
+        if (t.dataset.k == 'toko') NP = { n: '', hpp: 0, hj: 0, pot: 0 };
+        sheet(SH[t.dataset.k]());
+        L.profil();
+      },
+      snp() {
+        if (!NP.n.trim() || !NP.hj) return toast('Nama produk dan harga jual wajib diisi');
+        P.push({ ...NP, id: nid++, u: 0, d: 0 });
+        NP = { n: '', hpp: 0, hj: 0, pot: 0 };
+        sheet('');
+        go();
+        toast('Produk disimpan');
+      },
+      close() { sheet(''); },
+      stoko() {
+        S.name = $('#sn').value.trim() || S.name;
+        S.store = $('#ss').value.trim() || S.store;
+        sheet('');
+        go();
+        toast('Data toko disimpan');
+      },
+      en() { toast('English tersedia di versi berikutnya'); },
+      gelap() { toast('Mode gelap tersedia di versi berikutnya'); },
+      exp(t) { sheet(''); toast('Laporan disiapkan: ' + t.dataset.t); },
+      out() {
+        sheet('');
+        toast('Anda telah keluar (demo)');
+        location.hash = 'beranda'; // Navigasi -> kembali ke Beranda (#beranda)
+      }
+    };
+
+    /* ==========================================================================
+       10. GLOBAL EVENT LISTENERS & INISIALISASI
+       ========================================================================== */
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-a]');
+      if (t && A[t.dataset.a]) A[t.dataset.a](t, e);
+    });
+
+    document.addEventListener('input', e => {
+      const t = e.target, d = t.dataset;
+      if (d.r !== undefined) {
+        const v = d.k == 'q' ? +t.value.replace(/\D/g, '') : +t.value;
+        if (d.k == 'q') t.value = v || '';
+        off[+d.r][d.k] = v;
+        return;
+      }
+      if (!d.o) return;
+      const o = O[d.o]();
+      if (d.m) {
+        const v = +t.value.replace(/\D/g, '');
+        t.value = v ? v.toLocaleString('id-ID') : '';
+        o[d.k] = v;
+      } else if (d.n) {
+        o[d.k] = +t.value;
+      } else if (d.g) {
+        per = t.value;
+      } else {
+        o[d.k] = t.value;
+      }
+      L[cur] && L[cur]();
+    });
+
+    addEventListener('hashchange', go);
+    go();
+  </script>
+</body>
+</html>
